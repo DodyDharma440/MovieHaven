@@ -45,7 +45,7 @@ class Button extends StatelessWidget {
       child: ElevatedButton(
         onPressed: isLoading ? null : onPressed ?? () {},
         style: ElevatedButton.styleFrom(
-          padding: const EdgeInsets.symmetric(horizontal: 28, vertical: 24),
+          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 20),
           side: styles["side"],
           backgroundColor: styles['background'],
           shape: RoundedRectangleBorder(
