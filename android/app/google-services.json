@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "574820817153",
+    "project_id": "moviehaven-4d1f5",
+    "storage_bucket": "moviehaven-4d1f5.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:574820817153:android:704216bf9b20ee860e2300",
+        "android_client_info": {
+          "package_name": "com.example.movie_haven"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBG54Ic6eV8oRcPJaj1ZEKLM2MtEgKbZKI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

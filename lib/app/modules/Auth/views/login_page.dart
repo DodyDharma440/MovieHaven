@@ -2,13 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:get/get.dart';
+import 'package:movie_haven/app/modules/Auth/controllers/login_controller.dart';
 import 'package:movie_haven/app/shared/views/widget/button.dart';
 import 'package:movie_haven/app/shared/views/widget/text_input.dart';
 
-class LoginPage extends StatelessWidget {
-  final _formKey = GlobalKey<FormBuilderState>();
+class LoginPage extends StatefulWidget {
+  const LoginPage({super.key});
 
-  LoginPage({super.key});
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  LoginController loginController = Get.put(LoginController.instance);
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +26,7 @@ class LoginPage extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.all(32),
               child: FormBuilder(
-                key: _formKey,
+                key: loginController.formKey,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -53,16 +59,22 @@ class LoginPage extends StatelessWidget {
                       name: "password",
                       label: "Password",
                       isPassword: true,
-                      errorText: _formKey.currentState?.errors['password'],
+                      errorText: loginController
+                          .formKey.currentState?.errors['password'],
                       validator: FormBuilderValidators.compose([
                         FormBuilderValidators.required(),
                         FormBuilderValidators.password()
                       ]),
                     ),
                     const SizedBox(height: 32),
-                    Button(
-                      text: "Sign In",
-                      onPressed: () {},
+                    Obx(
+                      () => Button(
+                        text: "Sign In",
+                        isLoading: loginController.isLoading.value,
+                        onPressed: () {
+                          loginController.handleSubmit();
+                        },
+                      ),
                     ),
                     const SizedBox(height: 24),
                     Row(
@@ -71,7 +83,7 @@ class LoginPage extends StatelessWidget {
                         const Text("Don't have an account? "),
                         InkWell(
                           onTap: () {
-                            Get.toNamed("/register");
+                            Get.offAllNamed("/register");
                           },
                           child: Text(
                             "Sign Up",

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:get/get.dart';
+import 'package:movie_haven/app/modules/Auth/controllers/register_controller.dart';
 import 'package:movie_haven/app/shared/views/widget/button.dart';
 import 'package:movie_haven/app/shared/views/widget/text_input.dart';
 
@@ -13,7 +14,9 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
-  final _formKey = GlobalKey<FormBuilderState>();
+  RegisterController registerController = Get.put(
+    RegisterController.instance,
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +28,7 @@ class _RegisterPageState extends State<RegisterPage> {
             child: Padding(
               padding: const EdgeInsets.all(32),
               child: FormBuilder(
-                key: _formKey,
+                key: registerController.formKey,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -66,7 +69,8 @@ class _RegisterPageState extends State<RegisterPage> {
                       name: "password",
                       label: "Password",
                       isPassword: true,
-                      errorText: _formKey.currentState?.errors['password'],
+                      errorText: registerController
+                          .formKey.currentState?.errors['password'],
                       validator: FormBuilderValidators.compose([
                         FormBuilderValidators.required(),
                         FormBuilderValidators.password()
@@ -77,12 +81,13 @@ class _RegisterPageState extends State<RegisterPage> {
                       name: "confirmPassword",
                       label: "Confirm Password",
                       isPassword: true,
-                      errorText:
-                          _formKey.currentState?.errors['confirmPassword'],
+                      errorText: registerController
+                          .formKey.currentState?.errors['confirmPassword'],
                       validator: FormBuilderValidators.compose([
                         FormBuilderValidators.required(),
                         FormBuilderValidators.equal(
-                          _formKey.currentState?.fields['password']?.value ??
+                          registerController.formKey.currentState
+                                  ?.fields['password']?.value ??
                               "",
                           errorText:
                               "Confirm password is not equal to password",
@@ -90,9 +95,14 @@ class _RegisterPageState extends State<RegisterPage> {
                       ]),
                     ),
                     const SizedBox(height: 32),
-                    Button(
-                      text: "Sign Up",
-                      onPressed: () {},
+                    Obx(
+                      () => Button(
+                        text: "Sign Up",
+                        isLoading: registerController.isLoading.value,
+                        onPressed: () {
+                          registerController.handleSubmit();
+                        },
+                      ),
                     ),
                     const SizedBox(height: 24),
                     Row(
@@ -101,7 +111,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         const Text("Have an account? "),
                         InkWell(
                           onTap: () {
-                            Get.toNamed("/login");
+                            Get.offAllNamed("/login");
                           },
                           child: Text(
                             "Sign In",
