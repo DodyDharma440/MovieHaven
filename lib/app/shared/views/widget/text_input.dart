@@ -9,17 +9,18 @@ class TextInput extends StatefulWidget {
   final String? errorText;
   final Function(String?)? onChanged;
   final Function()? onEditingComplete;
+  final Widget? prefixIcon;
 
-  const TextInput({
-    super.key,
-    required this.name,
-    required this.label,
-    this.isPassword = false,
-    this.validator,
-    this.errorText,
-    this.onChanged,
-    this.onEditingComplete,
-  });
+  const TextInput(
+      {super.key,
+      required this.name,
+      required this.label,
+      this.isPassword = false,
+      this.validator,
+      this.errorText,
+      this.onChanged,
+      this.onEditingComplete,
+      this.prefixIcon});
 
   @override
   State<TextInput> createState() => _TextInputState();
@@ -64,6 +65,7 @@ class _TextInputState extends State<TextInput> {
             color: Colors.white38,
           ),
         ),
+        prefixIcon: widget.prefixIcon,
         suffixIcon: widget.isPassword
             ? Container(
                 width: 40,
