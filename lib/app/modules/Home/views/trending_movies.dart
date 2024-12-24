@@ -1,14 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:movie_haven/app/modules/Home/controllers/trending_movies_controller.dart';
+import 'package:movie_haven/app/shared/views/widget/horizontal_movies_list.dart';
 import 'package:movie_haven/app/shared/views/widget/section_list.dart';
 
 class TrendingMovies extends StatelessWidget {
-  const TrendingMovies({super.key});
+  TrendingMovies({super.key});
+
+  final controller = TrendingMoviesController.instance;
 
   @override
   Widget build(BuildContext context) {
-    return const SectionList(
+    return SectionList(
       title: "Trending",
-      child: Text("List here..."),
+      titlePadding: const EdgeInsets.symmetric(horizontal: 32),
+      child: GetBuilder<TrendingMoviesController>(
+        builder: (controller) {
+          return HorizontalMoviesList(
+            movies: controller.movies,
+            cardWidth: 300,
+            cardHeight: 200,
+            largerText: true,
+          );
+        },
+      ),
     );
   }
 }

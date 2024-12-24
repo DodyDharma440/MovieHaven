@@ -20,12 +20,12 @@ class SectionList extends StatelessWidget {
             child: Text(
               title,
               style: const TextStyle(
-                fontSize: 18,
+                fontSize: 20,
                 fontWeight: FontWeight.bold,
               ),
             ),
           ),
-          const SizedBox(height: 8),
+          const SizedBox(height: 10),
           child
         ],
       ),

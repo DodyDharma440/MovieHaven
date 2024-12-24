@@ -4,13 +4,21 @@ import 'package:movie_haven/config/config.dart';
 
 class HorizontalMoviesList extends StatelessWidget {
   final List<MovieModel> movies;
+  final double cardWidth;
+  final double cardHeight;
+  final bool largerText;
 
-  const HorizontalMoviesList({super.key, required this.movies});
+  const HorizontalMoviesList(
+      {super.key,
+      required this.movies,
+      this.cardWidth = 200,
+      this.cardHeight = 300,
+      this.largerText = false});
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 360,
+      height: cardHeight + 60,
       child: ListView(
         scrollDirection: Axis.horizontal,
         children: List.generate(movies.length, (index) {
@@ -21,12 +29,12 @@ class HorizontalMoviesList extends StatelessWidget {
               right: index == movies.length - 1 ? 32 : 16,
             ),
             child: SizedBox(
-              width: 200,
+              width: cardWidth,
               child: Column(
                 children: [
                   Container(
-                    height: 300,
-                    width: 200,
+                    height: cardHeight,
+                    width: cardWidth,
                     decoration: BoxDecoration(
                       color: Colors.white30,
                       borderRadius: BorderRadius.circular(16),
@@ -39,35 +47,40 @@ class HorizontalMoviesList extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 6),
-                  SizedBox(
-                    width: double.infinity,
-                    child: Text(
-                      item.title,
-                      textAlign: TextAlign.left,
-                      overflow: TextOverflow.ellipsis,
-                      style: const TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                  ),
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 2),
-                    child: Row(
+                    padding:
+                        EdgeInsets.symmetric(horizontal: largerText ? 6 : 2),
+                    child: Column(
                       children: [
-                        const Icon(
-                          Icons.star,
-                          color: Colors.yellow,
-                          size: 14,
-                        ),
-                        const SizedBox(width: 4),
-                        Text(
-                          "${item.voteAverage.toStringAsFixed(1)} (${item.voteCount})",
-                          style: const TextStyle(
-                            fontSize: 12,
-                            color: Colors.white54,
-                            fontWeight: FontWeight.w600,
+                        SizedBox(
+                          width: double.infinity,
+                          child: Text(
+                            item.title,
+                            textAlign: TextAlign.left,
+                            overflow: TextOverflow.ellipsis,
+                            style: TextStyle(
+                              fontSize: largerText ? 18 : 16,
+                              fontWeight: FontWeight.w600,
+                            ),
                           ),
+                        ),
+                        Row(
+                          children: [
+                            Icon(
+                              Icons.star,
+                              color: Colors.yellow,
+                              size: largerText ? 16 : 14,
+                            ),
+                            const SizedBox(width: 4),
+                            Text(
+                              "${item.voteAverage.toStringAsFixed(1)} (${item.voteCount})",
+                              style: TextStyle(
+                                fontSize: largerText ? 14 : 12,
+                                color: Colors.white54,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                          ],
                         ),
                       ],
                     ),

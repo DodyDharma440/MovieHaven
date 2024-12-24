@@ -11,7 +11,7 @@ abstract class HomeService {
     return Get.find<HomeService>();
   }
 
-  void getTrendingMovies();
+  Future<PaginationModel<MovieModel>> getTrendingMovies();
 
   Future<PaginationModel<MovieModel>> getPopularMovies();
 

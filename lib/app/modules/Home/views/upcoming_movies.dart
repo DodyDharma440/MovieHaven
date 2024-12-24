@@ -1,14 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:movie_haven/app/modules/Home/controllers/upcoming_movies_controller.dart';
+import 'package:movie_haven/app/shared/views/widget/horizontal_movies_list.dart';
 import 'package:movie_haven/app/shared/views/widget/section_list.dart';
 
 class UpcomingMovies extends StatelessWidget {
-  const UpcomingMovies({super.key});
+  UpcomingMovies({super.key});
+
+  final controller = UpcomingMoviesController.instance;
 
   @override
   Widget build(BuildContext context) {
-    return const SectionList(
+    return SectionList(
       title: "Upcoming",
-      child: Text("List here..."),
+      titlePadding: const EdgeInsets.symmetric(horizontal: 32),
+      child: GetBuilder<UpcomingMoviesController>(builder: (controller) {
+        return HorizontalMoviesList(movies: controller.movies);
+      }),
     );
   }
 }
