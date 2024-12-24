@@ -13,7 +13,7 @@ class TopRatedMovies extends StatelessWidget {
   Widget build(BuildContext context) {
     return SectionList(
       title: "Top rated",
-      titlePadding: const EdgeInsets.symmetric(horizontal: 32),
+      titlePadding: const EdgeInsets.symmetric(horizontal: 24),
       child: GetBuilder<TopRatedMoviesController>(builder: (controller) {
         return HorizontalMoviesList(movies: controller.movies);
       }),

@@ -13,7 +13,7 @@ class TrendingMovies extends StatelessWidget {
   Widget build(BuildContext context) {
     return SectionList(
       title: "Trending",
-      titlePadding: const EdgeInsets.symmetric(horizontal: 32),
+      titlePadding: const EdgeInsets.symmetric(horizontal: 24),
       child: GetBuilder<TrendingMoviesController>(
         builder: (controller) {
           return HorizontalMoviesList(

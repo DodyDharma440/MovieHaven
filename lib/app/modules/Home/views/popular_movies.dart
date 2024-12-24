@@ -13,7 +13,7 @@ class PopularMovies extends StatelessWidget {
   Widget build(BuildContext context) {
     return SectionList(
       title: "Popular",
-      titlePadding: const EdgeInsets.symmetric(horizontal: 32),
+      titlePadding: const EdgeInsets.symmetric(horizontal: 24),
       child: GetBuilder<PopularMoviesController>(builder: (controller) {
         return HorizontalMoviesList(movies: controller.movies);
       }),

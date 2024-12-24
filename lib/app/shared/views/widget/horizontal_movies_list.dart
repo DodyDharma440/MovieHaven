@@ -8,12 +8,13 @@ class HorizontalMoviesList extends StatelessWidget {
   final double cardHeight;
   final bool largerText;
 
-  const HorizontalMoviesList(
-      {super.key,
-      required this.movies,
-      this.cardWidth = 200,
-      this.cardHeight = 300,
-      this.largerText = false});
+  const HorizontalMoviesList({
+    super.key,
+    required this.movies,
+    this.cardWidth = 150,
+    this.cardHeight = 250,
+    this.largerText = false,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -25,8 +26,8 @@ class HorizontalMoviesList extends StatelessWidget {
           var item = movies[index];
           return Padding(
             padding: EdgeInsets.only(
-              left: index == 0 ? 32 : 0,
-              right: index == movies.length - 1 ? 32 : 16,
+              left: index == 0 ? 24 : 0,
+              right: index == movies.length - 1 ? 24 : 16,
             ),
             child: SizedBox(
               width: cardWidth,
@@ -52,6 +53,7 @@ class HorizontalMoviesList extends StatelessWidget {
                         EdgeInsets.symmetric(horizontal: largerText ? 6 : 2),
                     child: Column(
                       children: [
+                        SizedBox(height: largerText ? 3 : 1),
                         SizedBox(
                           width: double.infinity,
                           child: Text(
@@ -64,6 +66,7 @@ class HorizontalMoviesList extends StatelessWidget {
                             ),
                           ),
                         ),
+                        SizedBox(height: largerText ? 3 : 1),
                         Row(
                           children: [
                             Icon(
@@ -73,7 +76,7 @@ class HorizontalMoviesList extends StatelessWidget {
                             ),
                             const SizedBox(width: 4),
                             Text(
-                              "${item.voteAverage.toStringAsFixed(1)} (${item.voteCount})",
+                              "${item.voteAverage.toStringAsFixed(1)} (${item.voteCount}${largerText ? " reviews" : ""})",
                               style: TextStyle(
                                 fontSize: largerText ? 14 : 12,
                                 color: Colors.white54,

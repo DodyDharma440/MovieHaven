@@ -13,7 +13,7 @@ class UpcomingMovies extends StatelessWidget {
   Widget build(BuildContext context) {
     return SectionList(
       title: "Upcoming",
-      titlePadding: const EdgeInsets.symmetric(horizontal: 32),
+      titlePadding: const EdgeInsets.symmetric(horizontal: 24),
       child: GetBuilder<UpcomingMoviesController>(builder: (controller) {
         return HorizontalMoviesList(movies: controller.movies);
       }),
