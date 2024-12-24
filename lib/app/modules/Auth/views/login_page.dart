@@ -3,6 +3,7 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:get/get.dart';
 import 'package:movie_haven/app/modules/Auth/controllers/login_controller.dart';
+import 'package:movie_haven/app/modules/Auth/routes/auth_routes.dart';
 import 'package:movie_haven/app/shared/views/widget/button.dart';
 import 'package:movie_haven/app/shared/views/widget/text_input.dart';
 
@@ -83,7 +84,7 @@ class _LoginPageState extends State<LoginPage> {
                         const Text("Don't have an account? "),
                         InkWell(
                           onTap: () {
-                            Get.offAllNamed("/register");
+                            Get.offAllNamed(AuthRoutes.register);
                           },
                           child: Text(
                             "Sign Up",

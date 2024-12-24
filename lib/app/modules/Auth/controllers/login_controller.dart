@@ -3,14 +3,27 @@ import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:get/get.dart';
 import 'package:movie_haven/app/modules/Auth/services/auth_service.dart';
+import 'package:movie_haven/app/shared/controllers/auth_check.dart';
+import 'package:movie_haven/app/shared/controllers/auth_state.dart';
+import 'package:movie_haven/config/config.dart';
 
-class LoginController extends GetxController {
+class LoginController extends AuthCheck {
   static LoginController get instance {
     if (!Get.isRegistered<LoginController>()) Get.put(LoginController());
     return Get.find<LoginController>();
   }
 
+  @override
+  void onInit() {
+    if (AuthState.instance.isAuthenticated.isTrue) {
+      Get.offNamed(Config.homePath);
+    }
+    super.onInit();
+  }
+
   final AuthService _authService = AuthService.instance;
+  final AuthState _authState = AuthState.instance;
+
   final formKey = GlobalKey<FormBuilderState>(
     debugLabel: "GlobalFormKey #SignIn",
   );
@@ -22,13 +35,17 @@ class LoginController extends GetxController {
     update();
 
     try {
-      var userData = await _authService.login(body: {
+      await _authService.login(body: {
         "email": formKey.currentState?.instantValue['email'],
         "password": formKey.currentState?.instantValue['password'],
       });
-      print(userData);
+      _authState.setIsLogin();
+      _authState.setUserData();
+
       isLoading.value = false;
       update();
+
+      Get.offNamed(Config.homePath);
     } on FirebaseAuthException catch (e) {
       var message = "";
       if (e.code == 'user-not-found') {

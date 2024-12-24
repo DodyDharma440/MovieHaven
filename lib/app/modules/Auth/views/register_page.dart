@@ -3,6 +3,7 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:get/get.dart';
 import 'package:movie_haven/app/modules/Auth/controllers/register_controller.dart';
+import 'package:movie_haven/app/modules/Auth/routes/auth_routes.dart';
 import 'package:movie_haven/app/shared/views/widget/button.dart';
 import 'package:movie_haven/app/shared/views/widget/text_input.dart';
 
@@ -111,7 +112,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         const Text("Have an account? "),
                         InkWell(
                           onTap: () {
-                            Get.offAllNamed("/login");
+                            Get.offAllNamed(AuthRoutes.login);
                           },
                           child: Text(
                             "Sign In",

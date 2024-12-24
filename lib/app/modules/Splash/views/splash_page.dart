@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:movie_haven/app/modules/Auth/routes/auth_routes.dart';
+import 'package:movie_haven/app/modules/Splash/controller/splash_controller.dart';
 import 'package:movie_haven/app/shared/views/widget/button.dart';
 
 class SplashPage extends StatelessWidget {
-  const SplashPage({super.key});
+  SplashPage({super.key});
+
+  final SplashController controller = Get.put(SplashController());
 
   @override
   Widget build(BuildContext context) {
@@ -75,7 +79,7 @@ class SplashPage extends StatelessWidget {
                     Button(
                       text: "Get Started",
                       onPressed: () {
-                        Get.toNamed("/login");
+                        Get.toNamed(AuthRoutes.login);
                       },
                     ),
                     const SizedBox(height: 24),
