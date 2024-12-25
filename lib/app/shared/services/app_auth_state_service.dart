@@ -20,4 +20,10 @@ class AppAuthStateService implements AuthStateService {
   void setIsLogin() {
     box.write(key, true);
   }
+
+  @override
+  Future<void> signOut() async {
+    await FirebaseAuth.instance.signOut();
+    box.remove(key);
+  }
 }

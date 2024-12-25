@@ -1,6 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:movie_haven/app/modules/Explore/views/explore_page.dart';
+import 'package:movie_haven/app/modules/Favourites/views/favourites_page.dart';
+import 'package:movie_haven/app/modules/Home/views/home_page.dart';
+import 'package:movie_haven/app/modules/Settings/views/settings_page.dart';
 import 'package:movie_haven/app/shared/controllers/main_layout_controller.dart';
+
+List<Widget> pages = [
+  HomePage(),
+  ExplorePage(),
+  FavouritesPage(),
+  SettingsPage(),
+];
 
 class MainLayout extends StatelessWidget {
   MainLayout({super.key});
@@ -17,7 +28,7 @@ class MainLayout extends StatelessWidget {
         padding: const EdgeInsets.only(bottom: 24, left: 24, right: 24),
         color: Colors.transparent,
         child: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 40),
+          padding: const EdgeInsets.symmetric(horizontal: 38),
           decoration: BoxDecoration(
             color: Theme.of(context).primaryColor,
             borderRadius: BorderRadius.circular(100),
@@ -59,7 +70,7 @@ class MainLayout extends StatelessWidget {
         controller: _controller.pageController,
         physics: const BouncingScrollPhysics(),
         onPageChanged: _controller.animateToTab,
-        children: _controller.pages,
+        children: pages,
       ),
     );
   }

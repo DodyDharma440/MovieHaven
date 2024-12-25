@@ -15,4 +15,6 @@ abstract class AuthStateService {
   bool? getIsLogin();
 
   void setIsLogin();
+
+  Future<void> signOut();
 }

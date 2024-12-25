@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:movie_haven/app/shared/services/auth_state_service.dart';
+import 'package:movie_haven/routes/routes.dart';
 
 class AuthState extends GetxController {
   static AuthState get instance {
@@ -29,5 +30,16 @@ class AuthState extends GetxController {
   void setUserData() {
     isAuthenticated.value = true;
     userData = _authStateService.getUser();
+  }
+
+  void resetUserData() {
+    isAuthenticated.value = false;
+    userData = null;
+  }
+
+  void signOut() async {
+    await _authStateService.signOut();
+    resetUserData();
+    Get.offAllNamed(Routes.splash);
   }
 }

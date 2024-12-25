@@ -10,6 +10,7 @@ class Button extends StatelessWidget {
   final VoidCallback? onPressed;
   final String text;
   final bool isLoading;
+  final bool? isCompact;
 
   const Button({
     super.key,
@@ -17,6 +18,7 @@ class Button extends StatelessWidget {
     this.onPressed,
     required this.text,
     this.isLoading = false,
+    this.isCompact,
   });
 
   Map<String, dynamic> getStyles(ThemeData theme) {
@@ -45,7 +47,10 @@ class Button extends StatelessWidget {
       child: ElevatedButton(
         onPressed: isLoading ? null : onPressed ?? () {},
         style: ElevatedButton.styleFrom(
-          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 20),
+          padding: EdgeInsets.symmetric(
+            horizontal: isCompact == true ? 12 : 24,
+            vertical: isCompact == true ? 10 : 20,
+          ),
           side: styles["side"],
           backgroundColor: styles['background'],
           shape: RoundedRectangleBorder(
@@ -66,7 +71,7 @@ class Button extends StatelessWidget {
             : Text(
                 text,
                 style: TextStyle(
-                  fontSize: 16,
+                  fontSize: isCompact == true ? 14 : 16,
                   fontWeight: FontWeight.bold,
                   color: styles["textColor"],
                 ),

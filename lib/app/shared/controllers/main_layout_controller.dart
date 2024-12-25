@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:movie_haven/app/modules/Explore/views/explore_page.dart';
-import 'package:movie_haven/app/modules/Favourites/views/favourites_page.dart';
-import 'package:movie_haven/app/modules/Home/views/home_page.dart';
-import 'package:movie_haven/app/modules/Settings/views/settings_page.dart';
 
 enum TabPage { home, explore, favourites, settings }
 
@@ -33,13 +29,6 @@ class MainLayoutController extends GetxController {
   late PageController pageController;
 
   RxInt activePage = 0.obs;
-
-  List<Widget> pages = [
-    HomePage(),
-    ExplorePage(),
-    FavouritesPage(),
-    SettingsPage(),
-  ];
 
   void goToPage(TabPage name) {
     activePage.value = name.value;
