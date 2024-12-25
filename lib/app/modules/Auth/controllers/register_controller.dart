@@ -45,7 +45,6 @@ class RegisterController extends AuthCheck {
       Get.snackbar(
         "Success",
         "Register success, please login with your email and password",
-        snackPosition: SnackPosition.BOTTOM,
       );
       Get.offNamed(AuthRoutes.login);
       update();
@@ -58,7 +57,6 @@ class RegisterController extends AuthCheck {
       Get.snackbar(
         "Error",
         message,
-        snackPosition: SnackPosition.BOTTOM,
       );
       isLoading.value = false;
       update();
@@ -66,7 +64,6 @@ class RegisterController extends AuthCheck {
       Get.snackbar(
         "Error",
         "Something went wrong. Please try again.",
-        snackPosition: SnackPosition.BOTTOM,
       );
       isLoading.value = false;
       update();

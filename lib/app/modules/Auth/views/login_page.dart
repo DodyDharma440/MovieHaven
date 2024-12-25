@@ -15,7 +15,7 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  LoginController loginController = Get.put(LoginController.instance);
+  LoginController loginController = LoginController.instance;
 
   @override
   Widget build(BuildContext context) {

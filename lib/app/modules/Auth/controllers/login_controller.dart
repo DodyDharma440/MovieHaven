@@ -16,7 +16,7 @@ class LoginController extends AuthCheck {
   @override
   void onInit() {
     if (AuthState.instance.isAuthenticated.isTrue) {
-      Get.offNamed(Config.homePath);
+      Get.offAllNamed(Config.homePath);
     }
     super.onInit();
   }
@@ -45,7 +45,7 @@ class LoginController extends AuthCheck {
       isLoading.value = false;
       update();
 
-      Get.offNamed(Config.homePath);
+      Get.offAllNamed(Config.homePath);
     } on FirebaseAuthException catch (e) {
       var message = "";
       if (e.code == 'user-not-found') {
@@ -58,7 +58,6 @@ class LoginController extends AuthCheck {
       Get.snackbar(
         "Error",
         message,
-        snackPosition: SnackPosition.BOTTOM,
       );
       isLoading.value = false;
       update();
@@ -66,7 +65,6 @@ class LoginController extends AuthCheck {
       Get.snackbar(
         "Error",
         "Something went wrong. Please try again.",
-        snackPosition: SnackPosition.BOTTOM,
       );
       isLoading.value = false;
       update();
