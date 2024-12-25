@@ -2,7 +2,7 @@ class MovieModel {
   final int id;
   final bool adult;
   final String backdropPath;
-  final List<int> genreIds;
+  final List<int>? genreIds;
   final String originalLanguage;
   final String originalTitle;
   final String overview;
@@ -36,7 +36,8 @@ class MovieModel {
       id: json['id'],
       adult: json['adult'],
       backdropPath: json['backdrop_path'],
-      genreIds: List<int>.from(json['genre_ids']),
+      genreIds:
+          json['genre_ids'] != null ? List<int>.from(json['genre_ids']) : null,
       originalLanguage: json['original_language'],
       originalTitle: json['original_title'],
       overview: json['overview'],
