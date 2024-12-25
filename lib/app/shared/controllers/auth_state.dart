@@ -1,5 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
+import 'package:movie_haven/app/modules/Auth/routes/auth_routes.dart';
+import 'package:movie_haven/app/modules/Splash/routes/splash_routes.dart';
 import 'package:movie_haven/app/shared/services/auth_state_service.dart';
 import 'package:movie_haven/routes/routes.dart';
 
@@ -19,6 +21,21 @@ class AuthState extends GetxController {
     var userStorage = _authStateService.getIsLogin();
     isAuthenticated.value = userStorage == true;
     userData = _authStateService.getUser();
+    FirebaseAuth.instance.userChanges().listen((User? user) async {
+      if (user == null) {
+        await 0.5.delay(() {
+          if (Get.currentRoute != SplashRoutes.splash &&
+              Get.currentRoute != AuthRoutes.login &&
+              Get.currentRoute != AuthRoutes.register) {
+            signOut();
+          }
+        });
+
+        resetUserData();
+      } else {
+        setUserData(user: user);
+      }
+    });
 
     super.onInit();
   }
@@ -27,9 +44,9 @@ class AuthState extends GetxController {
     _authStateService.setIsLogin();
   }
 
-  void setUserData() {
+  void setUserData({User? user}) {
     isAuthenticated.value = true;
-    userData = _authStateService.getUser();
+    userData = user ?? _authStateService.getUser();
   }
 
   void resetUserData() {

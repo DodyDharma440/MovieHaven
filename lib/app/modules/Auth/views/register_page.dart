@@ -84,16 +84,18 @@ class _RegisterPageState extends State<RegisterPage> {
                       isPassword: true,
                       errorText: registerController
                           .formKey.currentState?.errors['confirmPassword'],
-                      validator: FormBuilderValidators.compose([
-                        FormBuilderValidators.required(),
-                        FormBuilderValidators.equal(
-                          registerController.formKey.currentState
-                                  ?.fields['password']?.value ??
-                              "",
-                          errorText:
-                              "Confirm password is not equal to password",
-                        ),
-                      ]),
+                      validator: FormBuilderValidators.compose(
+                        [
+                          FormBuilderValidators.required(),
+                          FormBuilderValidators.equal(
+                            registerController.formKey.currentState
+                                    ?.fields['password']?.value ??
+                                "",
+                            errorText:
+                                "Confirm password is not equal to password",
+                          ),
+                        ],
+                      ),
                     ),
                     const SizedBox(height: 32),
                     Obx(

@@ -5,8 +5,12 @@ class SectionList extends StatelessWidget {
   final Widget child;
   final EdgeInsetsGeometry? titlePadding;
 
-  const SectionList(
-      {super.key, required this.child, required this.title, this.titlePadding});
+  const SectionList({
+    super.key,
+    required this.title,
+    this.titlePadding,
+    required this.child,
+  });
 
   @override
   Widget build(BuildContext context) {
