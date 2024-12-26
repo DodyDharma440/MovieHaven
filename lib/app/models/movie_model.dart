@@ -96,7 +96,11 @@ class MovieModel {
   factory MovieModel.fromJson(Map<String, dynamic> json) {
     return MovieModel(
       id: json['id'],
-      adult: json['adult'],
+      posterPath: json['poster_path'],
+      title: json['title'],
+      voteAverage: json['vote_average'],
+      voteCount: json['vote_count'],
+      adult: json['adult'] ?? false,
       backdropPath: json['backdrop_path'],
       genreIds:
           json['genre_ids'] != null ? List<int>.from(json['genre_ids']) : null,
@@ -107,21 +111,17 @@ class MovieModel {
           ?.map<MovieProdCompanyModel>(
               (el) => MovieProdCompanyModel.fromJson(el))
           .toList(),
-      originalLanguage: json['original_language'],
-      originalTitle: json['original_title'],
-      overview: json['overview'],
-      popularity: json['popularity'],
-      posterPath: json['poster_path'],
-      releaseDate: json['release_date'],
-      title: json['title'],
-      video: json['video'],
-      voteAverage: json['vote_average'],
-      voteCount: json['vote_count'],
+      originalLanguage: json['original_language'] ?? "",
+      originalTitle: json['original_title'] ?? json['title'],
+      overview: json['overview'] ?? "",
+      popularity: json['popularity'] ?? 0,
+      releaseDate: json['release_date'] ?? "",
+      video: json['video'] ?? false,
       languages: json['spoken_languages']
           ?.map<String>((el) => (el['english_name'] ?? "-") as String)
           .toList(),
-      tagline: json['tagline'],
-      status: json['status'],
+      tagline: json['tagline'] ?? "",
+      status: json['status'] ?? "",
     );
   }
 }
