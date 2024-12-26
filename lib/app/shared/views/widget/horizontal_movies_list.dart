@@ -34,7 +34,16 @@ class HorizontalMoviesList extends StatelessWidget {
             child: InkWell(
               borderRadius: BorderRadius.circular(16),
               onTap: () {
-                Get.toNamed(MovieRoutes.movieDetail, arguments: item.id);
+                Map<String, dynamic> args = {
+                  "id": item.id,
+                  "title": item.title,
+                  "imagePath": item.posterPath,
+                };
+                Get.toNamed(
+                  MovieRoutes.movieDetail,
+                  arguments: args,
+                  preventDuplicates: false,
+                );
               },
               child: SizedBox(
                 width: cardWidth,

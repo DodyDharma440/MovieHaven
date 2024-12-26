@@ -12,25 +12,29 @@ class MovieDetailController extends GetData {
   }
 
   MovieModel? movie;
+  List<MovieModel> recommendations = [];
 
   final _movieService = MovieService.instance;
 
   @override
   void onInit() {
     super.onInit();
+
     getMovie();
   }
 
   void getMovie() async {
-    int id = Get.arguments;
+    int id = Get.arguments['id'];
     startLoading();
     try {
       final response = await _movieService.getDetailMovie(id);
+      final resRec = await _movieService.getRecommendationMovies(id);
       movie = response;
+      recommendations = resRec.results;
+
       update();
       stopLoading();
     } catch (e) {
-      print(e);
       setErrorMessage();
       stopLoading();
     }

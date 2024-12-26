@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:movie_haven/app/models/movie_model.dart';
+import 'package:movie_haven/app/models/pagination_model.dart';
 import 'package:movie_haven/app/modules/Movie/services/app_movie_service.dart';
 
 abstract class MovieService {
@@ -11,4 +12,6 @@ abstract class MovieService {
   }
 
   Future<MovieModel> getDetailMovie(int id);
+
+  Future<PaginationModel<MovieModel>> getRecommendationMovies(int id);
 }
