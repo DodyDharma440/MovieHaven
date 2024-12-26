@@ -10,17 +10,20 @@ class TextInput extends StatefulWidget {
   final Function(String?)? onChanged;
   final Function()? onEditingComplete;
   final Widget? prefixIcon;
+  final bool isCompact;
 
-  const TextInput(
-      {super.key,
-      required this.name,
-      required this.label,
-      this.isPassword = false,
-      this.validator,
-      this.errorText,
-      this.onChanged,
-      this.onEditingComplete,
-      this.prefixIcon});
+  const TextInput({
+    super.key,
+    required this.name,
+    required this.label,
+    this.isPassword = false,
+    this.validator,
+    this.errorText,
+    this.onChanged,
+    this.onEditingComplete,
+    this.prefixIcon,
+    this.isCompact = false,
+  });
 
   @override
   State<TextInput> createState() => _TextInputState();
@@ -39,9 +42,9 @@ class _TextInputState extends State<TextInput> {
       onChanged: widget.onChanged,
       onEditingComplete: widget.onEditingComplete,
       decoration: InputDecoration(
-        contentPadding: const EdgeInsets.symmetric(
+        contentPadding: EdgeInsets.symmetric(
           horizontal: 20,
-          vertical: 20,
+          vertical: widget.isCompact ? 12 : 20,
         ),
         label: Text(
           widget.label,

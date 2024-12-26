@@ -11,6 +11,8 @@ class Button extends StatelessWidget {
   final String text;
   final bool isLoading;
   final bool? isCompact;
+  final double? width;
+  final double? horizontalPadding;
 
   const Button({
     super.key,
@@ -19,6 +21,8 @@ class Button extends StatelessWidget {
     required this.text,
     this.isLoading = false,
     this.isCompact,
+    this.width = double.infinity,
+    this.horizontalPadding,
   });
 
   Map<String, dynamic> getStyles(ThemeData theme) {
@@ -43,12 +47,12 @@ class Button extends StatelessWidget {
     var styles = getStyles(Theme.of(context));
 
     return SizedBox(
-      width: double.infinity,
+      width: width,
       child: ElevatedButton(
         onPressed: isLoading ? null : onPressed,
         style: ElevatedButton.styleFrom(
           padding: EdgeInsets.symmetric(
-            horizontal: isCompact == true ? 12 : 24,
+            horizontal: horizontalPadding ?? (isCompact == true ? 12 : 24),
             vertical: isCompact == true ? 10 : 20,
           ),
           side: styles["side"],
