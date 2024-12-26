@@ -162,17 +162,28 @@ class MovieDetailPage extends StatelessWidget {
                                       ),
                                       const SizedBox(width: 10),
                                       InkWell(
-                                        onTap: () {},
+                                        onTap: controller.isLoadingToggle.value
+                                            ? null
+                                            : () {
+                                                controller.toggleFavorite(
+                                                  controller.isFavorite.value,
+                                                );
+                                              },
                                         borderRadius:
                                             BorderRadius.circular(100),
-                                        child: const SizedBox(
+                                        child: SizedBox(
                                           width: 50,
                                           height: 50,
                                           child: Center(
                                             child: Icon(
-                                              Icons.star_border_outlined,
+                                              controller.isFavorite.value
+                                                  ? Icons.star
+                                                  : Icons.star_border_outlined,
                                               size: 28,
-                                              color: Colors.white70,
+                                              color: controller.isFavorite.value
+                                                  ? Theme.of(context)
+                                                      .primaryColor
+                                                  : Colors.white70,
                                             ),
                                           ),
                                         ),

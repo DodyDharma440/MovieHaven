@@ -81,6 +81,18 @@ class MovieModel {
     required this.status,
   });
 
+  Map<String, dynamic> toJsonFavourite() {
+    Map<String, dynamic> json = {
+      "id": id,
+      "poster_path": posterPath,
+      "title": title,
+      "vote_average": voteAverage,
+      "vote_count": voteCount,
+    };
+
+    return json;
+  }
+
   factory MovieModel.fromJson(Map<String, dynamic> json) {
     return MovieModel(
       id: json['id'],
