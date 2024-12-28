@@ -96,7 +96,7 @@ class MovieModel {
   factory MovieModel.fromJson(Map<String, dynamic> json) {
     return MovieModel(
       id: json['id'],
-      posterPath: json['poster_path'],
+      posterPath: json['poster_path'] ?? "",
       title: json['title'],
       voteAverage: json['vote_average'],
       voteCount: json['vote_count'],

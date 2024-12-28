@@ -2,7 +2,7 @@ import 'package:get/get.dart';
 import 'package:movie_haven/app/models/movie_model.dart';
 import 'package:movie_haven/app/models/pagination_model.dart';
 import 'package:movie_haven/app/modules/Home/services/home_service.dart';
-import 'package:movie_haven/app/shared/controllers/get_data.dart';
+import 'package:movie_haven/app/shared/controllers/paginated_controller.dart';
 
 enum MovieType {
   popular,
@@ -11,16 +11,13 @@ enum MovieType {
   upcoming,
 }
 
-class ExploreController extends GetData {
+class ExploreController extends PaginatedController {
   static ExploreController get instance {
     if (!Get.isRegistered<ExploreController>()) {
       Get.put(ExploreController());
     }
     return Get.find<ExploreController>();
   }
-
-  RxInt page = 1.obs;
-  RxInt totalPage = 1.obs;
 
   Rx<MovieType> type = MovieType.trending.obs;
   List<MovieModel> movies = [];
@@ -72,23 +69,5 @@ class ExploreController extends GetData {
     type.value = value;
     page.value = 1;
     update();
-  }
-
-  void nextPage() {
-    page.value = page.value + 1;
-    update();
-  }
-
-  void prevPage() {
-    page.value = page.value - 1;
-    update();
-  }
-
-  bool isCanPrev() {
-    return page.value > 1;
-  }
-
-  bool isCanNext() {
-    return page.value < totalPage.value;
   }
 }

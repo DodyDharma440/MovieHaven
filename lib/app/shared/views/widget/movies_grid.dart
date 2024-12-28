@@ -12,23 +12,30 @@ class MoviesGrid extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GridView.builder(
-      itemCount: movies.length,
-      shrinkWrap: true,
-      physics: const ScrollPhysics(),
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2,
-        mainAxisExtent: 310,
-        mainAxisSpacing: 24,
-        crossAxisSpacing: 24,
-      ),
-      itemBuilder: (_, index) {
-        var item = movies[index];
-        return MovieCard(
-          item: item,
-          cardWidth: null,
-        );
-      },
-    );
+    return movies.isNotEmpty
+        ? GridView.builder(
+            itemCount: movies.length,
+            shrinkWrap: true,
+            physics: const ScrollPhysics(),
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              mainAxisExtent: 310,
+              mainAxisSpacing: 24,
+              crossAxisSpacing: 24,
+            ),
+            itemBuilder: (_, index) {
+              var item = movies[index];
+              return MovieCard(
+                item: item,
+                cardWidth: null,
+              );
+            },
+          )
+        : const SizedBox(
+            height: 100,
+            child: Center(
+              child: Text("No movies yet"),
+            ),
+          );
   }
 }

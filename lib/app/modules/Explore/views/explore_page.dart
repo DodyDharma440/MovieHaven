@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:movie_haven/app/modules/Explore/controllers/explore_controller.dart';
+import 'package:movie_haven/app/modules/Explore/routes/explore_routes.dart';
 import 'package:movie_haven/app/shared/views/widget/button.dart';
-import 'package:movie_haven/app/shared/views/widget/movies_grid.dart';
+import 'package:movie_haven/app/shared/views/widget/paginated_movies_grid.dart';
 import 'package:movie_haven/app/shared/views/widget/text_input.dart';
 
 List<Map<String, dynamic>> filters = [
@@ -22,14 +23,17 @@ class ExplorePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 80,
-        flexibleSpace: const SafeArea(
+        flexibleSpace: SafeArea(
           child: Padding(
-            padding: EdgeInsets.all(16),
+            padding: const EdgeInsets.all(16),
             child: TextInput(
               name: "search",
-              label: "Search",
+              label: "Search movies...",
               isCompact: true,
-              prefixIcon: Icon(Icons.search),
+              prefixIcon: const Icon(Icons.search),
+              onSubmitted: (value) {
+                Get.toNamed(ExploreRoutes.search, arguments: value);
+              },
             ),
           ),
         ),
@@ -76,58 +80,11 @@ class ExplorePage extends StatelessWidget {
                 GetBuilder<ExploreController>(
                   builder: (controller) => Padding(
                     padding: const EdgeInsets.all(24),
-                    child: controller.isLoading.value
-                        ? const SizedBox(
-                            height: 200,
-                            child: Center(
-                              child: CircularProgressIndicator(),
-                            ),
-                          )
-                        : MoviesGrid(
-                            movies: controller.movies,
-                          ),
+                    child: PaginatedMoviesGrid(
+                      controller: controller,
+                      movies: controller.movies,
+                    ),
                   ),
-                ),
-                GetBuilder<ExploreController>(
-                  builder: (controller) {
-                    return Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 24),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Button(
-                            onPressed: controller.isCanPrev()
-                                ? () {
-                                    controller.prevPage();
-                                  }
-                                : null,
-                            text: "Prev",
-                            isCompact: true,
-                            variant: controller.isCanPrev()
-                                ? ButtonVariant.outline
-                                : ButtonVariant.filled,
-                            width: null,
-                          ),
-                          Text(
-                            "Page ${controller.page} of ${controller.totalPage}",
-                          ),
-                          Button(
-                            onPressed: controller.isCanNext()
-                                ? () {
-                                    controller.nextPage();
-                                  }
-                                : null,
-                            text: "Next",
-                            isCompact: true,
-                            variant: controller.isCanNext()
-                                ? ButtonVariant.outline
-                                : ButtonVariant.filled,
-                            width: null,
-                          ),
-                        ],
-                      ),
-                    );
-                  },
                 ),
               ],
             ),

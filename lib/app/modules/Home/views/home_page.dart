@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:movie_haven/app/modules/Explore/routes/explore_routes.dart';
 import 'package:movie_haven/app/modules/Home/views/popular_movies.dart';
 import 'package:movie_haven/app/modules/Home/views/top_rated_movies.dart';
 import 'package:movie_haven/app/modules/Home/views/trending_movies.dart';
@@ -84,10 +86,13 @@ class HomePage extends StatelessWidget {
                       ],
                     ),
                     const SizedBox(height: 24),
-                    const TextInput(
+                    TextInput(
                       name: "search",
                       label: "Search movies...",
-                      prefixIcon: Padding(
+                      onSubmitted: (value) {
+                        Get.toNamed(ExploreRoutes.search, arguments: value);
+                      },
+                      prefixIcon: const Padding(
                         padding: EdgeInsets.symmetric(horizontal: 16),
                         child: Icon(
                           Icons.search,

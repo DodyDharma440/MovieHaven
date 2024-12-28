@@ -11,6 +11,7 @@ class TextInput extends StatefulWidget {
   final Function()? onEditingComplete;
   final Widget? prefixIcon;
   final bool isCompact;
+  final Function(String?)? onSubmitted;
 
   const TextInput({
     super.key,
@@ -23,6 +24,7 @@ class TextInput extends StatefulWidget {
     this.onEditingComplete,
     this.prefixIcon,
     this.isCompact = false,
+    this.onSubmitted,
   });
 
   @override
@@ -41,6 +43,7 @@ class _TextInputState extends State<TextInput> {
       autovalidateMode: AutovalidateMode.onUserInteraction,
       onChanged: widget.onChanged,
       onEditingComplete: widget.onEditingComplete,
+      onSubmitted: widget.onSubmitted,
       decoration: InputDecoration(
         contentPadding: EdgeInsets.symmetric(
           horizontal: 20,

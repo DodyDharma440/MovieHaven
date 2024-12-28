@@ -301,15 +301,17 @@ class MovieDetailPage extends StatelessWidget {
                                 ),
                               ),
                             ),
-                            SectionList(
-                              title: "Recommendations",
-                              titlePadding: const EdgeInsets.symmetric(
-                                horizontal: 24,
-                              ),
-                              child: HorizontalMoviesList(
-                                movies: controller.recommendations,
-                              ),
-                            )
+                            controller.recommendations.isNotEmpty
+                                ? SectionList(
+                                    title: "Recommendations",
+                                    titlePadding: const EdgeInsets.symmetric(
+                                      horizontal: 24,
+                                    ),
+                                    child: HorizontalMoviesList(
+                                      movies: controller.recommendations,
+                                    ),
+                                  )
+                                : const SizedBox()
                           ],
                         ),
                       );
