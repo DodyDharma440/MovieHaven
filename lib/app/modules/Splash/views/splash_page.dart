@@ -13,7 +13,7 @@ class SplashPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Obx(
-        () => controller.isLoading.value
+        () => controller.isLoadingCheck.value
             ? const Expanded(
                 child: Center(
                   child: CircularProgressIndicator(),

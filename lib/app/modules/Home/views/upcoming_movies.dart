@@ -5,18 +5,18 @@ import 'package:movie_haven/app/shared/views/widget/horizontal_movies_list.dart'
 import 'package:movie_haven/app/shared/views/widget/section_list.dart';
 
 class UpcomingMovies extends StatelessWidget {
-  UpcomingMovies({super.key});
-
-  final controller = UpcomingMoviesController.instance;
+  const UpcomingMovies({super.key});
 
   @override
   Widget build(BuildContext context) {
     return SectionList(
       title: "Upcoming",
       titlePadding: const EdgeInsets.symmetric(horizontal: 24),
-      child: GetBuilder<UpcomingMoviesController>(builder: (controller) {
-        return HorizontalMoviesList(movies: controller.movies);
-      }),
+      child: GetBuilder<UpcomingMoviesController>(
+          init: UpcomingMoviesController.instance,
+          builder: (controller) {
+            return HorizontalMoviesList(movies: controller.movies);
+          }),
     );
   }
 }

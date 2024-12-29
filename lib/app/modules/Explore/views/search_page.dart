@@ -7,9 +7,7 @@ import 'package:movie_haven/app/shared/views/widget/paginated_movies_grid.dart';
 import 'package:movie_haven/app/shared/views/widget/text_input.dart';
 
 class SearchPage extends StatelessWidget {
-  SearchPage({super.key});
-
-  final controller = search_ctrl.SearchController.instance;
+  const SearchPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -19,6 +17,7 @@ class SearchPage extends StatelessWidget {
       ),
       body: SingleChildScrollView(
         child: GetBuilder<search_ctrl.SearchController>(
+          init: search_ctrl.SearchController.instance,
           builder: (controller) => Padding(
             padding: const EdgeInsets.all(24),
             child: Column(

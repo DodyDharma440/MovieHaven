@@ -6,7 +6,7 @@ import 'package:movie_haven/app/shared/views/widget/button.dart';
 import 'package:movie_haven/app/shared/views/widget/paginated_movies_grid.dart';
 import 'package:movie_haven/app/shared/views/widget/text_input.dart';
 
-List<Map<String, dynamic>> filters = [
+const List<Map<String, dynamic>> filters = [
   {"label": "Trending", "value": MovieType.trending},
   {"label": "Popular", "value": MovieType.popular},
   {"label": "Upcoming", "value": MovieType.upcoming},
@@ -14,9 +14,7 @@ List<Map<String, dynamic>> filters = [
 ];
 
 class ExplorePage extends StatelessWidget {
-  ExplorePage({super.key});
-
-  final controller = ExploreController.instance;
+  const ExplorePage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -46,45 +44,51 @@ class ExplorePage extends StatelessWidget {
               children: [
                 SizedBox(
                   height: 52,
-                  child: GetBuilder<ExploreController>(builder: (controller) {
-                    return ListView(
-                      scrollDirection: Axis.horizontal,
-                      children: List.generate(filters.length, (index) {
-                        var item = filters[index];
-                        var isActive = item['value'] == controller.type.value;
+                  child: GetBuilder<ExploreController>(
+                      init: ExploreController.instance,
+                      builder: (controller) {
+                        return ListView(
+                          scrollDirection: Axis.horizontal,
+                          children: List.generate(filters.length, (index) {
+                            var item = filters[index];
+                            var isActive =
+                                item['value'] == controller.type.value;
 
-                        return Padding(
-                          padding: EdgeInsets.only(
-                            left: index == 0 ? 24 : 0,
-                            right: index == filters.length - 1 ? 24 : 16,
-                          ),
-                          child: Button(
-                            onPressed: () {
-                              controller.setType(
-                                item['value'],
-                              );
-                            },
-                            variant: isActive
-                                ? ButtonVariant.filled
-                                : ButtonVariant.outline,
-                            text: item['label'],
-                            width: null,
-                            horizontalPadding: 30,
-                            isCompact: true,
-                          ),
+                            return Padding(
+                              padding: EdgeInsets.only(
+                                left: index == 0 ? 24 : 0,
+                                right: index == filters.length - 1 ? 24 : 16,
+                              ),
+                              child: Button(
+                                onPressed: () {
+                                  controller.setType(
+                                    item['value'],
+                                  );
+                                },
+                                variant: isActive
+                                    ? ButtonVariant.filled
+                                    : ButtonVariant.outline,
+                                text: item['label'],
+                                width: null,
+                                horizontalPadding: 30,
+                                isCompact: true,
+                              ),
+                            );
+                          }),
                         );
                       }),
-                    );
-                  }),
                 ),
                 GetBuilder<ExploreController>(
-                  builder: (controller) => Padding(
-                    padding: const EdgeInsets.all(24),
-                    child: PaginatedMoviesGrid(
-                      controller: controller,
-                      movies: controller.movies,
-                    ),
-                  ),
+                  init: ExploreController.instance,
+                  builder: (controller) {
+                    return Padding(
+                      padding: const EdgeInsets.all(24),
+                      child: PaginatedMoviesGrid(
+                        controller: controller,
+                        movies: controller.movies,
+                      ),
+                    );
+                  },
                 ),
               ],
             ),

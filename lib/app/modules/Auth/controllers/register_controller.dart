@@ -2,7 +2,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:get/get.dart';
-import 'package:movie_haven/app/modules/Auth/routes/auth_routes.dart';
 import 'package:movie_haven/app/modules/Auth/services/auth_service.dart';
 import 'package:movie_haven/app/shared/controllers/auth_check.dart';
 import 'package:movie_haven/app/shared/controllers/auth_state.dart';
@@ -27,6 +26,8 @@ class RegisterController extends AuthCheck {
     debugLabel: "GlobalFormKey #Register",
   );
 
+  final AuthState _authState = AuthState.instance;
+
   RxBool isLoading = false.obs;
 
   Future<void> handleSubmit() async {
@@ -42,12 +43,17 @@ class RegisterController extends AuthCheck {
         formKey.currentState?.instantValue['name'],
       );
       isLoading.value = false;
+
+      _authState.setIsLogin();
+      _authState.setUserData();
+
+      update();
+
       Get.snackbar(
         "Success",
-        "Register success, please login with your email and password",
+        "Register success",
       );
-      Get.offNamed(AuthRoutes.login);
-      update();
+      Get.offAllNamed(Config.homePath);
     } on FirebaseAuthException catch (e) {
       var message = "";
       if (e.code == 'email-already-in-use') {

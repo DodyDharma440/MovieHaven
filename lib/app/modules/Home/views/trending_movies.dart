@@ -5,9 +5,7 @@ import 'package:movie_haven/app/shared/views/widget/horizontal_movies_list.dart'
 import 'package:movie_haven/app/shared/views/widget/section_list.dart';
 
 class TrendingMovies extends StatelessWidget {
-  TrendingMovies({super.key});
-
-  final controller = TrendingMoviesController.instance;
+  const TrendingMovies({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -15,6 +13,7 @@ class TrendingMovies extends StatelessWidget {
       title: "Trending",
       titlePadding: const EdgeInsets.symmetric(horizontal: 24),
       child: GetBuilder<TrendingMoviesController>(
+        init: TrendingMoviesController.instance,
         builder: (controller) {
           return HorizontalMoviesList(
             movies: controller.movies,
