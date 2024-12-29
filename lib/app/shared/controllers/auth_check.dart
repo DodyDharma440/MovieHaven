@@ -6,6 +6,8 @@ import 'auth_state.dart';
 class AuthCheck extends GetxController {
   final AuthState auth = AuthState.instance;
 
+  RxBool isLoading = false.obs;
+
   @override
   void onInit() {
     super.onInit();
@@ -14,7 +16,8 @@ class AuthCheck extends GetxController {
 
   void redirect() async {
     if (auth.isAuthenticated.isTrue) {
-      await 0.5.delay(() => Get.offAllNamed(Config.homePath));
+      isLoading.value = true;
+      await 1.delay(() => Get.offAllNamed(Config.homePath));
     }
   }
 }

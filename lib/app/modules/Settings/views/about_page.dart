@@ -95,7 +95,7 @@ class AboutPage extends StatelessWidget {
                   child: Column(
                     children: [
                       const Text(
-                        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus convallis efficitur euismod. Etiam vestibulum massa eget tellus tincidunt, eu aliquet nulla fermentum. Sed fermentum nulla eget arcu facilisis commodo at ut neque. Mauris eget cursus ligula. Morbi id velit eu neque mollis pharetra. Nunc metus metus, ultrices vel eros a, hendrerit maximus purus.",
+                        "MovieHaven is a simple and intuitive application designed for movie enthusiasts. Powered by the TMDB API, it allows you to browse and search for movies effortlessly. Save your favorites to keep track of what you love, and explore a world of entertainment right at your fingertips. Built as a portfolio project, MovieHaven showcases a seamless and user-friendly experience for discovering great movies.",
                       ),
                       const SizedBox(height: 32),
                       Row(

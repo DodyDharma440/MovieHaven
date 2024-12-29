@@ -28,6 +28,7 @@ class PaginatedMoviesGrid extends StatelessWidget {
             : MoviesGrid(
                 movies: movies,
               ),
+        const SizedBox(height: 24),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [

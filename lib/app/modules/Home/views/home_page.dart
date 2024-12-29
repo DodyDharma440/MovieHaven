@@ -57,7 +57,7 @@ class HomePage extends StatelessWidget {
                                 ),
                               ),
                               const Text(
-                                "Enjoy your favourite movies!",
+                                "Find your favourite movies!",
                                 style: TextStyle(
                                   color: Colors.white54,
                                 ),
